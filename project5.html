@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 5 - Multi-Zone Home Security System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef4fb;
+            color: #111827;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1050px;
+            margin: 35px auto;
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+            border: 1px solid #e5e7eb;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f2f6e, #1e4fa3);
+            color: white;
+            text-align: center;
+            padding: 45px 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.16);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #dbeafe;
+            font-size: 18px;
+        }
+
+        .content {
+            padding: 35px;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #f8fafc;
+            color: #1e3a8a;
+            border: 1px solid #dbeafe;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .back:hover {
+            background: #e0f2fe;
+        }
+
+        .section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+        }
+
+        .section h2 {
+            color: #0f2f6e;
+            font-size: 25px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #1e40af;
+            font-size: 20px;
+            margin: 18px 0 10px;
+        }
+
+        p {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-right: 25px;
+            margin-top: 12px;
+        }
+
+        li {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+        }
+
+        .map {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .map-card {
+            background: #f8fafc;
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .map-card strong {
+            color: #0f2f6e;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .copy-btn {
+            border: none;
+            background: #0f4c81;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #1e40af;
+        }
+
+        pre {
+            direction: ltr;
+            text-align: left;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 22px;
+            border-radius: 18px;
+            overflow-x: auto;
+            font-size: 15px;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .explain-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            overflow: hidden;
+            border-radius: 16px;
+            font-size: 15px;
+        }
+
+        .explain-table th {
+            background: #0f2f6e;
+            color: white;
+            padding: 14px;
+            text-align: right;
+        }
+
+        .explain-table td {
+            border: 1px solid #e5e7eb;
+            padding: 13px;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+
+        .explain-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .code-cell {
+            direction: ltr;
+            text-align: left;
+            font-family: Consolas, "Courier New", monospace;
+            color: #0f172a;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-right: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 14px;
+            color: #1e3a8a;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        @media (min-width: 760px) {
+            .map {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .page {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 18px;
+            }
+
+            .explain-table {
+                font-size: 13px;
+            }
+
+            .code-cell {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="hero">
+            <div class="badge">Project 5</div>
+            <h1>Multi-Zone Home Security System</h1>
+            <p>نظام حماية منزلي متعدد المناطق باستخدام 8086 و 8255</p>
+        </div>
+
+        <div class="content">
+            <a class="back" href="index.html">← الرجوع للصفحة الرئيسية</a>
+
+            <div class="section">
+                <h2>1. شرح المشكلة وفهم فكرتها</h2>
+
+                <p>
+                    في نظام حماية منزلي، قد يكون لدينا عدة أبواب ونوافذ وكل واحد منها عليه حساس مغناطيسي.
+                    إذا فتح أي باب أو نافذة، يجب أن يعرف النظام بسرعة أي منطقة تم اختراقها، ثم يشغل الإنذار.
+                </p>
+
+                <p>
+                    لو تم توصيل كل حساس بدائرة مستقلة أو فحص كل حساس بطريقة منفصلة، سيزيد عدد الأسلاك ويصبح النظام
+                    أكثر تعقيداً. لذلك نستخدم 8255 حتى نقرأ 8 حساسات دفعة واحدة من خلال Port A.
+                </p>
+
+                <h3>فكرة المشروع ببساطة</h3>
+                <p>
+                    يتم توصيل 8 حساسات أبواب ونوافذ على Port A. كل حساس يمثل Bit واحد. إذا كانت قيمة Port A تساوي
+                    00H، فهذا يعني أن كل الأبواب والنوافذ مغلقة. وإذا تغيرت القيمة، يعرف البرنامج أن هناك اختراقاً،
+                    ثم يبحث عن البت الذي أصبح 1 ويعرض رقم المنطقة على Port C، ويشغل الإنذار من Port B.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>2. شرح الحل باستخدام 8255</h2>
+
+                <p>
+                    يتم برمجة Port A كمدخل Input لأنه يستقبل إشارات الحساسات. ويتم برمجة Port B كمخرج Output
+                    لتشغيل الصفارة ولمبة الإنذار وإشارة القفل. أما Port C فيتم استخدامه كمخرج لعرض رقم المنطقة
+                    التي تم فتحها.
+                </p>
+
+                <p>
+                    البرنامج يقرأ Port A باستمرار. إذا كانت القيمة 00H، يبقى النظام في الحالة الآمنة. إذا كانت
+                    القيمة مختلفة عن الصفر، يقوم البرنامج بتخزين القيمة ثم يستدعي دالة FIND_ZONE لتحديد أول بت
+                    مفعّل، وبعدها يرسل رقم المنطقة إلى Port C.
+                </p>
+
+                <p>
+                    بعد تحديد المنطقة، يدخل البرنامج في حلقة إنذار. في هذه الحلقة يتم تشغيل الصفارة ولمبة الإنذار
+                    ثم إطفاء الصفارة بشكل متكرر، بحيث يكون الإنذار متقطعاً. ويظل النظام في حالة الإنذار حتى تعود
+                    قراءة Port A إلى 00H.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>3. Interface Map</h2>
+
+                <div class="map">
+                    <div class="map-card">
+                        <strong>Port A = Input</strong>
+                        PA0 = Door 1 Sensor<br>
+                        PA1 = Door 2 Sensor<br>
+                        PA2 = Window 1 Sensor<br>
+                        PA3 = Window 2 Sensor<br>
+                        PA4 = Back Door Sensor<br>
+                        PA5 = Garage Sensor<br>
+                        PA6 = Balcony Sensor<br>
+                        PA7 = Emergency Zone
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port B = Output</strong>
+                        PB0 = Siren / Buzzer<br>
+                        PB1 = Red Alarm LED<br>
+                        PB2 = Security Lock Signal
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port C = Output</strong>
+                        Displays Zone Number<br>
+                        01H = Zone 1<br>
+                        02H = Zone 2<br>
+                        ...<br>
+                        08H = Zone 8
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="note">
+                    Control Word المستخدم هو <b>90H</b>. معناه أن Port A مدخل Input، و Port B و Port C مخارج Output،
+                    وكلها تعمل في Mode 0.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="code-header">
+                    <h2>4. الكود الكامل للمشكلة</h2>
+                    <button class="copy-btn" onclick="copyCode()">نسخ الكود</button>
+                </div>
+
+<pre><code id="asmCode">ORG 100H
+
+; -------------------------------
+; 8255 Port Addresses
+; -------------------------------
+PORTA   EQU 300H
+PORTB   EQU 301H
+PORTC   EQU 302H
+CTRL    EQU 303H
+
+; -------------------------------
+; Main Program
+; -------------------------------
+START:
+    MOV DX, CTRL
+    MOV AL, 90H
+    OUT DX, AL
+
+    ; System starts in secure state
+    MOV DX, PORTB
+    MOV AL, 00H
+    OUT DX, AL
+
+    MOV DX, PORTC
+    MOV AL, 00H
+    OUT DX, AL
+
+MAIN_LOOP:
+    ; Read all 8 security sensors
+    MOV DX, PORTA
+    IN  AL, DX
+
+    ; If no sensor is active, stay secure
+    CMP AL, 00H
+    JE SECURE_STATE
+
+    ; Save sensor pattern
+    MOV BL, AL
+
+    ; Find which zone is active
+    CALL FIND_ZONE
+
+    ; Display zone number on Port C
+    MOV DX, PORTC
+    MOV AL, CL
+    OUT DX, AL
+
+    JMP ALARM_LOOP
+
+; -------------------------------
+; Secure State
+; -------------------------------
+SECURE_STATE:
+    ; Turn off siren, alarm LED, and lock signal
+    MOV DX, PORTB
+    MOV AL, 00H
+    OUT DX, AL
+
+    ; Clear zone display
+    MOV DX, PORTC
+    MOV AL, 00H
+    OUT DX, AL
+
+    JMP MAIN_LOOP
+
+; -------------------------------
+; Alarm State
+; -------------------------------
+ALARM_LOOP:
+    ; Siren ON + Red LED ON + Lock signal ON
+    MOV DX, PORTB
+    MOV AL, 07H
+    OUT DX, AL
+
+    CALL SHORT_DELAY
+
+    ; Siren OFF, keep Red LED and Lock signal ON
+    MOV DX, PORTB
+    MOV AL, 06H
+    OUT DX, AL
+
+    CALL SHORT_DELAY
+
+    ; Read sensors again
+    MOV DX, PORTA
+    IN  AL, DX
+
+    ; Stay in alarm while any sensor is active
+    CMP AL, 00H
+    JNE ALARM_LOOP
+
+    JMP SECURE_STATE
+
+; -------------------------------
+; Find active zone number
+; Input : BL = sensor pattern
+; Output: CL = zone number
+; -------------------------------
+FIND_ZONE PROC
+    PUSH AX
+
+    MOV AL, BL
+    MOV CL, 01H
+
+CHECK_ZONE:
+    TEST AL, 01H
+    JNZ ZONE_FOUND
+
+    SHR AL, 1
+    INC CL
+
+    CMP CL, 09H
+    JNE CHECK_ZONE
+
+    MOV CL, 00H
+
+ZONE_FOUND:
+    POP AX
+    RET
+FIND_ZONE ENDP
+
+; -------------------------------
+; Short Delay
+; -------------------------------
+SHORT_DELAY PROC
+    PUSH CX
+
+    MOV CX, 0FFFFH
+
+D1:
+    LOOP D1
+
+    POP CX
+    RET
+SHORT_DELAY ENDP
+
+END START</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>5. شرح الكود سطر بسطر</h2>
+
+                <table class="explain-table">
+                    <tr>
+                        <th>السطر</th>
+                        <th>الشرح</th>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ORG 100H</td>
+                        <td>يحدد أن البرنامج من نوع COM ويبدأ من العنوان 100H.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTA EQU 300H</td>
+                        <td>يعطي اسم PORTA للعنوان 300H، وهو المنفذ المستخدم لقراءة حساسات الأبواب والنوافذ.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTB EQU 301H</td>
+                        <td>يعطي اسم PORTB للعنوان 301H، وهو المنفذ المستخدم لتشغيل الإنذار ولمبة الخطر والقفل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTC EQU 302H</td>
+                        <td>يعطي اسم PORTC للعنوان 302H، وهو المنفذ المستخدم لعرض رقم المنطقة المخترقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CTRL EQU 303H</td>
+                        <td>يعطي اسم CTRL للعنوان 303H، وهو Control Register الخاص بإعداد 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">START:</td>
+                        <td>بداية البرنامج الرئيسية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, CTRL</td>
+                        <td>يضع عنوان Control Register داخل DX حتى نرسل له Control Word.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 90H</td>
+                        <td>يضع قيمة Control Word داخل AL. القيمة 90H تعني Port A مدخل و Port B و Port C مخارج.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 90H إلى Control Register، وبذلك يتم ضبط اتجاه المنافذ في 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يضع عنوان Port B داخل DX حتى يتم إطفاء مخارج الإنذار في البداية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL. الصفر يعني أن كل مخارج Port B مطفأة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port B، فيكون الإنذار ولمبة الخطر والقفل مطفأة في البداية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يضع عنوان Port C داخل DX حتى يتم تصفير شاشة أو مؤشر المنطقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL من أجل مسح رقم المنطقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port C، أي لا توجد منطقة مخترقة في البداية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MAIN_LOOP:</td>
+                        <td>بداية حلقة المراقبة المستمرة لحساسات الحماية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTA</td>
+                        <td>يضع عنوان Port A في DX حتى يقرأ الحساسات.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">IN AL, DX</td>
+                        <td>يقرأ حالة Port A ويضعها في AL. كل بت في AL يمثل حساساً معيناً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CMP AL, 00H</td>
+                        <td>يقارن قيمة AL بالصفر لمعرفة هل كل الحساسات مطفأة أم لا.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JE SECURE_STATE</td>
+                        <td>إذا كانت قيمة AL تساوي 00H، فهذا يعني أن البيت آمن، فيذهب إلى SECURE_STATE.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV BL, AL</td>
+                        <td>يحفظ نمط الحساسات داخل BL حتى يتم استخدامه في دالة تحديد المنطقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL FIND_ZONE</td>
+                        <td>يستدعي دالة FIND_ZONE لتحديد رقم أول منطقة فيها حساس مفعّل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C لأننا سنعرض عليه رقم المنطقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, CL</td>
+                        <td>ينقل رقم المنطقة من CL إلى AL حتى نرسله إلى Port C.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل رقم المنطقة إلى Port C لعرض أي باب أو نافذة تم فتحها.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP ALARM_LOOP</td>
+                        <td>بعد تحديد المنطقة، ينتقل البرنامج إلى حلقة الإنذار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SECURE_STATE:</td>
+                        <td>بداية الجزء الخاص بالحالة الآمنة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B لإطفاء الإنذار ومؤشرات الخطر.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL لإطفاء كل مخارج Port B.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port B، فيتم إطفاء الصفارة واللمبة والقفل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C لمسح رقم المنطقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL لأن لا توجد منطقة مخترقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port C، فيتم تصفير عرض المنطقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>يرجع إلى حلقة المراقبة الرئيسية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ALARM_LOOP:</td>
+                        <td>بداية حلقة الإنذار التي تعمل عند وجود اختراق.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B لأنه يتحكم بالصفارة ولمبة الإنذار والقفل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 07H</td>
+                        <td>يضع 07H في AL. هذه القيمة تشغل PB0 و PB1 و PB2، أي الصفارة واللمبة والقفل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 07H إلى Port B، فيتم تشغيل الإنذار الكامل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>ينفذ تأخيراً قصيراً والصفارة شغالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B مرة أخرى لتغيير حالة الصفارة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 06H</td>
+                        <td>يضع 06H في AL. هذه القيمة تطفئ الصفارة PB0 وتبقي اللمبة والقفل شغالين PB1 و PB2.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 06H إلى Port B، فيصبح الإنذار متقطعاً لأن الصفارة تطفئ مؤقتاً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>ينفذ تأخيراً قصيراً والصفارة مطفأة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTA</td>
+                        <td>يحدد Port A لقراءة الحساسات مرة ثانية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">IN AL, DX</td>
+                        <td>يقرأ حالة الحساسات مرة أخرى لمعرفة هل ما زال الاختراق موجوداً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CMP AL, 00H</td>
+                        <td>يقارن قراءة الحساسات بالصفر.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNE ALARM_LOOP</td>
+                        <td>إذا كانت القيمة ليست صفراً، فهذا يعني أن هناك حساساً لا يزال نشطاً، فيبقى داخل الإنذار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP SECURE_STATE</td>
+                        <td>إذا عادت كل الحساسات للصفر، يرجع النظام للحالة الآمنة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">FIND_ZONE PROC</td>
+                        <td>بداية دالة تحديد رقم المنطقة النشطة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PUSH AX</td>
+                        <td>يحفظ قيمة AX في Stack حتى لا تضيع أثناء تنفيذ الدالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, BL</td>
+                        <td>ينقل نمط الحساسات من BL إلى AL حتى يتم فحصه داخل الدالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CL, 01H</td>
+                        <td>يبدأ رقم المنطقة من 1، لأن أول حساس PA0 يمثل Zone 1.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CHECK_ZONE:</td>
+                        <td>بداية حلقة فحص البتات واحداً بعد الآخر.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 01H</td>
+                        <td>يفحص أقل بت في AL. إذا كان 1 فهذا يعني أن المنطقة الحالية هي المفتوحة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNZ ZONE_FOUND</td>
+                        <td>إذا كان البت المفحوص يساوي 1، يقفز إلى ZONE_FOUND لأن المنطقة تم تحديدها.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHR AL, 1</td>
+                        <td>يزحزح AL خانة واحدة لليمين حتى ينتقل لفحص البت التالي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">INC CL</td>
+                        <td>يزيد رقم المنطقة بمقدار 1 لأننا انتقلنا إلى الحساس التالي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CMP CL, 09H</td>
+                        <td>يقارن CL مع 09H للتأكد أننا لم نتجاوز المناطق الثمانية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNE CHECK_ZONE</td>
+                        <td>إذا لم نصل إلى 9، يستمر في فحص البتات.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CL, 00H</td>
+                        <td>إذا لم يجد أي بت مفعّل، يجعل رقم المنطقة 0 كحالة احتياطية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ZONE_FOUND:</td>
+                        <td>هذا المكان يصل إليه البرنامج عندما يجد المنطقة النشطة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">POP AX</td>
+                        <td>يعيد قيمة AX القديمة من Stack.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">RET</td>
+                        <td>يرجع من دالة FIND_ZONE إلى البرنامج الرئيسي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">FIND_ZONE ENDP</td>
+                        <td>نهاية دالة تحديد المنطقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY PROC</td>
+                        <td>بداية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PUSH CX</td>
+                        <td>يحفظ قيمة CX في Stack قبل استخدامه في التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CX, 0FFFFH</td>
+                        <td>يضع قيمة كبيرة في CX لصنع تأخير بسيط.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">D1:</td>
+                        <td>بداية حلقة التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">LOOP D1</td>
+                        <td>ينقص CX ويكرر الحلقة حتى يصبح CX صفراً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">POP CX</td>
+                        <td>يعيد قيمة CX القديمة بعد انتهاء التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">RET</td>
+                        <td>يرجع من دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY ENDP</td>
+                        <td>نهاية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">END START</td>
+                        <td>نهاية البرنامج، والتنفيذ يبدأ من START.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>ملخص سريع للمناقشة</h2>
+
+                <p>
+                    في هذا المشروع استخدمنا 8255 كواجهة لنظام حماية منزلي. Port A يعمل كمدخل لقراءة 8 حساسات
+                    أبواب ونوافذ، وPort B يعمل كمخرج لتشغيل الصفارة ولمبة الإنذار والقفل، وPort C يعمل كمخرج
+                    لعرض رقم المنطقة التي تم اختراقها. إذا كانت قراءة Port A تساوي 00H فالنظام آمن، وإذا تغيرت
+                    القيمة يقوم البرنامج بتحديد أول بت مفعّل باستخدام TEST و SHR، ثم يعرض رقم المنطقة ويشغل إنذاراً
+                    متقطعاً حتى تعود الحساسات إلى الوضع الطبيعي.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            8086 Assembly - 8255 Programmable Peripheral Interface
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById("asmCode").innerText;
+            navigator.clipboard.writeText(code).then(function () {
+                alert("تم نسخ الكود بنجاح");
+            });
+        }
+    </script>
+
+</body>
+  </html>
