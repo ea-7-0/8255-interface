@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 4 - Automated Factory Sorting Line</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef4fb;
+            color: #111827;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1050px;
+            margin: 35px auto;
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+            border: 1px solid #e5e7eb;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f2f6e, #1e4fa3);
+            color: white;
+            text-align: center;
+            padding: 45px 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.16);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #dbeafe;
+            font-size: 18px;
+        }
+
+        .content {
+            padding: 35px;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #f8fafc;
+            color: #1e3a8a;
+            border: 1px solid #dbeafe;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .back:hover {
+            background: #e0f2fe;
+        }
+
+        .section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+        }
+
+        .section h2 {
+            color: #0f2f6e;
+            font-size: 25px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #1e40af;
+            font-size: 20px;
+            margin: 18px 0 10px;
+        }
+
+        p {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-right: 25px;
+            margin-top: 12px;
+        }
+
+        li {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+        }
+
+        .map {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .map-card {
+            background: #f8fafc;
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .map-card strong {
+            color: #0f2f6e;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .copy-btn {
+            border: none;
+            background: #0f4c81;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #1e40af;
+        }
+
+        pre {
+            direction: ltr;
+            text-align: left;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 22px;
+            border-radius: 18px;
+            overflow-x: auto;
+            font-size: 15px;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .explain-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            overflow: hidden;
+            border-radius: 16px;
+            font-size: 15px;
+        }
+
+        .explain-table th {
+            background: #0f2f6e;
+            color: white;
+            padding: 14px;
+            text-align: right;
+        }
+
+        .explain-table td {
+            border: 1px solid #e5e7eb;
+            padding: 13px;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+
+        .explain-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .code-cell {
+            direction: ltr;
+            text-align: left;
+            font-family: Consolas, "Courier New", monospace;
+            color: #0f172a;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-right: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 14px;
+            color: #1e3a8a;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        @media (min-width: 760px) {
+            .map {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .page {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 18px;
+            }
+
+            .explain-table {
+                font-size: 13px;
+            }
+
+            .code-cell {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="hero">
+            <div class="badge">Project 4</div>
+            <h1>Automated Factory Sorting Line</h1>
+            <p>نظام فرز آلي للمنتجات التالفة باستخدام 8086 و 8255</p>
+        </div>
+
+        <div class="content">
+            <a class="back" href="index.html">← الرجوع للصفحة الرئيسية</a>
+
+            <div class="section">
+                <h2>1. شرح المشكلة وفهم فكرتها</h2>
+
+                <p>
+                    في خطوط الإنتاج داخل المصانع، تمر المنتجات على سير متحرك. أثناء مرور المنتجات، تقوم حساسات بصرية
+                    بفحص الجودة. إذا اكتشف الحساس أن المنتج تالف، يجب تشغيل ذراع هوائي مناسب لدفع المنتج خارج السير.
+                </p>
+
+                <p>
+                    المشكلة أن توصيل كل حساس وكل ذراع فرز بمنفذ مستقل يزيد عدد الأسلاك ويجعل النظام معقداً ومكلفاً.
+                    لذلك نحتاج إلى طريقة أبسط تستخدم أقل عدد ممكن من المنافذ مع الحفاظ على سرعة الاستجابة.
+                </p>
+
+                <h3>فكرة المشروع ببساطة</h3>
+                <p>
+                    نستخدم Port C فقط بطريقة ذكية. النصف السفلي من Port C، أي PC0 إلى PC3، يكون Input للحساسات.
+                    والنصف العلوي، أي PC4 إلى PC7، يكون Output لأذرع الفرز. عندما يشتغل حساس في النصف السفلي،
+                    يقوم البرنامج بإزاحة الإشارة أربع خانات لليسار حتى تصل إلى الذراع المقابل في النصف العلوي.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>2. شرح الحل باستخدام 8255</h2>
+
+                <p>
+                    يتم ضبط 8255 في Mode 0. في هذا المشروع يتم استخدام Port C بشكل مقسم:
+                    Lower Nibble كمدخل، و Upper Nibble كمخرج.
+                </p>
+
+                <p>
+                    يقرأ البرنامج قيمة Port C، ثم يحتفظ فقط بالنصف السفلي باستخدام AND 0FH.
+                    إذا كانت النتيجة صفر، فهذا يعني أنه لا يوجد منتج تالف. أما إذا كانت النتيجة ليست صفراً،
+                    يقوم البرنامج بإزاحة القيمة إلى اليسار أربع مرات باستخدام SHL حتى تنتقل الإشارة من PC0-PC3
+                    إلى PC4-PC7.
+                </p>
+
+                <p>
+                    بعد ذلك يرسل البرنامج القيمة الناتجة إلى Port C لتشغيل ذراع الفرز المناسب. ثم يعمل تأخير بسيط
+                    حتى يأخذ الذراع وقتاً لدفع المنتج، وبعدها يطفئ أذرع الفرز ويرجع للمراقبة.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>3. Interface Map</h2>
+
+                <div class="map">
+                    <div class="map-card">
+                        <strong>Port C Lower = Input</strong>
+                        PC0 = Quality Sensor 1<br>
+                        PC1 = Quality Sensor 2<br>
+                        PC2 = Quality Sensor 3<br>
+                        PC3 = Quality Sensor 4
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port C Upper = Output</strong>
+                        PC4 = Ejector Arm 1<br>
+                        PC5 = Ejector Arm 2<br>
+                        PC6 = Ejector Arm 3<br>
+                        PC7 = Ejector Arm 4
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port B = Output</strong>
+                        PB0 = Conveyor ON<br>
+                        PB1 = Defect Detected LED
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="note">
+                    Control Word المستخدم هو <b>81H</b>. معناه أن Port C Lower مدخل Input، و Port C Upper مخرج Output،
+                    و Port B مخرج Output، والنظام يعمل في Mode 0.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="code-header">
+                    <h2>4. الكود الكامل للمشكلة</h2>
+                    <button class="copy-btn" onclick="copyCode()">نسخ الكود</button>
+                </div>
+
+<pre><code id="asmCode">ORG 100H
+
+; -------------------------------
+; 8255 Port Addresses
+; -------------------------------
+PORTA   EQU 300H
+PORTB   EQU 301H
+PORTC   EQU 302H
+CTRL    EQU 303H
+
+; -------------------------------
+; Main Program
+; -------------------------------
+START:
+    MOV DX, CTRL
+    MOV AL, 81H
+    OUT DX, AL
+
+    ; Start conveyor motor
+    MOV DX, PORTB
+    MOV AL, 01H
+    OUT DX, AL
+
+    ; Turn off all ejector arms
+    MOV DX, PORTC
+    MOV AL, 00H
+    OUT DX, AL
+
+MAIN_LOOP:
+    ; Read lower 4 bits from Port C sensors
+    MOV DX, PORTC
+    IN  AL, DX
+
+    ; Keep only PC0-PC3
+    AND AL, 0FH
+
+    ; If no defective product, continue monitoring
+    CMP AL, 00H
+    JE NO_DEFECT
+
+    ; Save sensor pattern
+    MOV BL, AL
+
+    ; Shift lower nibble to upper nibble
+    SHL BL, 1
+    SHL BL, 1
+    SHL BL, 1
+    SHL BL, 1
+
+    ; Turn on conveyor and defect indicator
+    MOV DX, PORTB
+    MOV AL, 03H
+    OUT DX, AL
+
+    ; Activate corresponding ejector arm
+    MOV DX, PORTC
+    MOV AL, BL
+    OUT DX, AL
+
+    CALL EJECT_DELAY
+
+    ; Turn off ejector arms
+    MOV DX, PORTC
+    MOV AL, 00H
+    OUT DX, AL
+
+    ; Conveyor only ON, defect LED OFF
+    MOV DX, PORTB
+    MOV AL, 01H
+    OUT DX, AL
+
+    JMP MAIN_LOOP
+
+; -------------------------------
+; No defective product
+; -------------------------------
+NO_DEFECT:
+    ; Keep conveyor ON only
+    MOV DX, PORTB
+    MOV AL, 01H
+    OUT DX, AL
+
+    ; Keep ejector arms OFF
+    MOV DX, PORTC
+    MOV AL, 00H
+    OUT DX, AL
+
+    JMP MAIN_LOOP
+
+; -------------------------------
+; Delay for ejector arm movement
+; -------------------------------
+EJECT_DELAY PROC
+    PUSH CX
+
+    MOV CX, 20
+
+ED_LOOP:
+    CALL SHORT_DELAY
+    LOOP ED_LOOP
+
+    POP CX
+    RET
+EJECT_DELAY ENDP
+
+; -------------------------------
+; Short Delay
+; -------------------------------
+SHORT_DELAY PROC
+    PUSH CX
+
+    MOV CX, 0FFFFH
+
+D1:
+    LOOP D1
+
+    POP CX
+    RET
+SHORT_DELAY ENDP
+
+END START</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>5. شرح الكود سطر بسطر</h2>
+
+                <table class="explain-table">
+                    <tr>
+                        <th>السطر</th>
+                        <th>الشرح</th>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ORG 100H</td>
+                        <td>يحدد أن البرنامج من نوع COM ويبدأ من العنوان 100H.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTA EQU 300H</td>
+                        <td>يعطي اسم PORTA للعنوان 300H. في هذا المشروع لا نستخدمه بشكل أساسي، لكنه موجود ضمن عناوين 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTB EQU 301H</td>
+                        <td>يعطي اسم PORTB للعنوان 301H، وهو منفذ التحكم بالسير المتحرك ومؤشر المنتج التالف.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTC EQU 302H</td>
+                        <td>يعطي اسم PORTC للعنوان 302H، وهو المنفذ المستخدم للحساسات وأذرع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CTRL EQU 303H</td>
+                        <td>يعطي اسم CTRL للعنوان 303H، وهو Control Register الخاص بضبط 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">START:</td>
+                        <td>بداية تنفيذ البرنامج.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, CTRL</td>
+                        <td>يضع عنوان Control Register داخل DX حتى يتم إرسال Control Word إليه.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 81H</td>
+                        <td>يضع Control Word في AL. القيمة 81H تجعل Port C Lower مدخل و Port C Upper مخرج في Mode 0.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 81H إلى Control Register، وبذلك يتم إعداد 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يضع عنوان Port B في DX حتى يتحكم بالسير المتحرك.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 01H</td>
+                        <td>يضع 01H في AL، أي تشغيل PB0 فقط. هذا يمثل تشغيل السير المتحرك.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 01H إلى Port B، فيبدأ السير المتحرك بالعمل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يضع عنوان Port C في DX للتحكم بأذرع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL لإطفاء جميع أذرع الفرز في البداية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port C، أي أن أذرع الفرز كلها مطفأة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MAIN_LOOP:</td>
+                        <td>بداية حلقة المراقبة المستمرة للحساسات.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C لأن الحساسات متصلة بالنصف السفلي من هذا المنفذ.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">IN AL, DX</td>
+                        <td>يقرأ قيمة Port C ويضعها في AL. نحن نهتم فقط بالبتات PC0 إلى PC3.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">AND AL, 0FH</td>
+                        <td>يحذف النصف العلوي من AL ويحتفظ فقط بالنصف السفلي PC0-PC3. القيمة 0FH تساوي 00001111.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CMP AL, 00H</td>
+                        <td>يقارن قيمة الحساسات بالصفر لمعرفة هل يوجد منتج تالف أم لا.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JE NO_DEFECT</td>
+                        <td>إذا كانت قيمة الحساسات صفر، فهذا يعني لا يوجد منتج تالف، فيذهب إلى NO_DEFECT.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV BL, AL</td>
+                        <td>يحفظ نمط الحساسات داخل BL لأننا سنستخدم AL لاحقاً للإخراج.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHL BL, 1</td>
+                        <td>يزحزح قيمة BL خانة واحدة لليسار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHL BL, 1</td>
+                        <td>يزحزح القيمة مرة ثانية لليسار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHL BL, 1</td>
+                        <td>يزحزح القيمة مرة ثالثة لليسار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHL BL, 1</td>
+                        <td>يزحزح القيمة مرة رابعة. الآن انتقلت الإشارة من النصف السفلي إلى النصف العلوي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B لتشغيل مؤشر وجود منتج تالف مع استمرار السير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 03H</td>
+                        <td>يضع 03H في AL، أي تشغيل PB0 للسير و PB1 لمؤشر المنتج التالف.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 03H إلى Port B، فيبقى السير يعمل ويشتغل مؤشر العطل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C لأنه سيشغل ذراع الفرز المناسب.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, BL</td>
+                        <td>ينقل القيمة المزاحة من BL إلى AL حتى يتم إرسالها إلى Port C.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل القيمة إلى Port C، فيشتغل الذراع المقابل للحساس الذي اكتشف المنتج التالف.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL EJECT_DELAY</td>
+                        <td>يستدعي تأخيراً حتى يأخذ الذراع الهوائي وقتاً كافياً لدفع المنتج خارج السير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>بعد انتهاء التأخير، يحدد Port C لإطفاء أذرع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL لإطفاء جميع الأذرع.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port C، فتتوقف أذرع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B لتحديث حالة السير ومؤشر العطل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 01H</td>
+                        <td>يضع 01H في AL، أي تشغيل السير فقط وإطفاء مؤشر العطل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 01H إلى Port B، فيبقى السير يعمل ويرجع النظام للوضع الطبيعي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>يرجع البرنامج إلى حلقة مراقبة الحساسات.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">NO_DEFECT:</td>
+                        <td>بداية الجزء الذي ينفذ عندما لا يوجد منتج تالف.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B للتحكم بالسير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 01H</td>
+                        <td>يضع 01H في AL، أي تشغيل السير فقط.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 01H إلى Port B، فيستمر السير المتحرك بالعمل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C للتحكم بأذرع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL، أي أن أذرع الفرز يجب أن تكون مطفأة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port C لإطفاء الأذرع.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>يرجع إلى مراقبة الحساسات من جديد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">EJECT_DELAY PROC</td>
+                        <td>بداية دالة التأخير الخاصة بحركة ذراع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PUSH CX</td>
+                        <td>يحفظ قيمة CX في Stack قبل استخدامه داخل الدالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CX, 20</td>
+                        <td>يجعل CX يساوي 20، أي سيتم تكرار التأخير القصير 20 مرة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ED_LOOP:</td>
+                        <td>بداية حلقة تأخير ذراع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>يستدعي دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">LOOP ED_LOOP</td>
+                        <td>ينقص CX بمقدار 1، وإذا لم يصل إلى صفر يرجع إلى ED_LOOP.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">POP CX</td>
+                        <td>يعيد قيمة CX القديمة من Stack.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">RET</td>
+                        <td>يرجع من دالة EJECT_DELAY إلى المكان الذي استدعاها.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">EJECT_DELAY ENDP</td>
+                        <td>نهاية دالة تأخير ذراع الفرز.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY PROC</td>
+                        <td>بداية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PUSH CX</td>
+                        <td>يحفظ CX قبل استخدامه.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CX, 0FFFFH</td>
+                        <td>يضع قيمة كبيرة في CX حتى يصنع تأخيراً بسيطاً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">D1:</td>
+                        <td>بداية حلقة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">LOOP D1</td>
+                        <td>ينقص CX ويكرر الحلقة حتى يصبح CX صفراً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">POP CX</td>
+                        <td>يعيد قيمة CX القديمة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">RET</td>
+                        <td>يرجع من دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY ENDP</td>
+                        <td>نهاية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">END START</td>
+                        <td>نهاية البرنامج، والتنفيذ يبدأ من START.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>ملخص سريع للمناقشة</h2>
+
+                <p>
+                    في هذا المشروع استخدمنا Port C بطريقة مقسمة. النصف السفلي PC0-PC3 تم استخدامه كمدخل للحساسات،
+                    والنصف العلوي PC4-PC7 تم استخدامه كمخرج لأذرع الفرز. يقرأ المعالج الحساسات، ثم يستخدم AND 0FH
+                    للاحتفاظ بالنصف السفلي فقط. إذا وجد منتج تالف، يستخدم SHL أربع مرات لنقل الإشارة إلى النصف العلوي،
+                    ثم يرسلها إلى Port C لتشغيل الذراع المناسب. استخدمنا Control Word بقيمة 81H لأن Lower Port C
+                    مدخل و Upper Port C مخرج.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            8086 Assembly - 8255 Programmable Peripheral Interface
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById("asmCode").innerText;
+            navigator.clipboard.writeText(code).then(function () {
+                alert("تم نسخ الكود بنجاح");
+            });
+        }
+    </script>
+
+</body>
+                                                          </html>
