@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8255 Interface Projects</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eaf4ff, #ffffff);
+            min-height: 100vh;
+            color: #0f172a;
+        }
+
+        .top-bar {
+            background: #0f4c81;
+            color: white;
+            padding: 18px 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .top-bar h1 {
+            font-size: 26px;
+            letter-spacing: 0.5px;
+        }
+
+        .top-bar p {
+            margin-top: 6px;
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 55px auto;
+            padding: 0 25px;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 18px;
+            padding: 40px 35px;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(15, 76, 129, 0.15);
+            border: 1px solid #dbeafe;
+        }
+
+        .hero h2 {
+            color: #0f4c81;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #475569;
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 18px;
+        }
+
+        .project-btn {
+            display: block;
+            text-decoration: none;
+            background: #0f4c81;
+            color: white;
+            padding: 20px 24px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.25s ease;
+            box-shadow: 0 6px 18px rgba(15, 76, 129, 0.25);
+            border: 2px solid #0f4c81;
+        }
+
+        .project-btn:hover {
+            background: white;
+            color: #0f4c81;
+            transform: translateY(-3px);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .chip {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #075985;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        @media (min-width: 700px) {
+            .buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-btn:nth-child(5) {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .top-bar {
+                padding: 16px 22px;
+            }
+
+            .top-bar h1 {
+                font-size: 22px;
+            }
+
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .hero h2 {
+                font-size: 25px;
+            }
+
+            .project-btn {
+                font-size: 16px;
+                padding: 18px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <h1>Application of Interface 8255 in Assembly Systems</h1>
+        <p>Intel 8086 Microprocessor & 8255 Programmable Peripheral Interface</p>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <span class="chip">Microprocessor 8086 Project</span>
+
+            <h2>8255 Interface Project Codes</h2>
+
+            <p>
+                This website contains five independent 8255 interface projects.
+                Each project includes the problem idea, 8255 interface solution,
+                complete EMU8086 assembly code, and line-by-line explanation.
+            </p>
+
+            <div class="buttons">
+                <a class="project-btn" href="project1.html">
+                    Project 1: Power Surge & Fire Emergency System
+                </a>
+
+                <a class="project-btn" href="project2.html">
+                    Project 2: Voltage Sags & Sensitive Load Protection
+                </a>
+
+                <a class="project-btn" href="project3.html">
+                    Project 3: Access Control & Security Gates
+                </a>
+
+                <a class="project-btn" href="project4.html">
+                    Project 4: Automated Factory Sorting Line
+                </a>
+
+                <a class="project-btn" href="project5.html">
+                    Project 5: Multi-Zone Home Security System
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            Prepared for 8086 Assembly and 8255 Interface Discussion
+        </div>
+    </div>
+
+</body>
+</html>
