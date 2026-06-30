@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 - Voltage Sags & Sensitive Load Protection</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef4fb;
+            color: #111827;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1050px;
+            margin: 35px auto;
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+            border: 1px solid #e5e7eb;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f2f6e, #1e4fa3);
+            color: white;
+            text-align: center;
+            padding: 45px 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.16);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #dbeafe;
+            font-size: 18px;
+        }
+
+        .content {
+            padding: 35px;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #f8fafc;
+            color: #1e3a8a;
+            border: 1px solid #dbeafe;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .back:hover {
+            background: #e0f2fe;
+        }
+
+        .section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+        }
+
+        .section h2 {
+            color: #0f2f6e;
+            font-size: 25px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #1e40af;
+            font-size: 20px;
+            margin: 18px 0 10px;
+        }
+
+        p {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-right: 25px;
+            margin-top: 12px;
+        }
+
+        li {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+        }
+
+        .map {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .map-card {
+            background: #f8fafc;
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .map-card strong {
+            color: #0f2f6e;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .copy-btn {
+            border: none;
+            background: #0f4c81;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #1e40af;
+        }
+
+        pre {
+            direction: ltr;
+            text-align: left;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 22px;
+            border-radius: 18px;
+            overflow-x: auto;
+            font-size: 15px;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .explain-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            overflow: hidden;
+            border-radius: 16px;
+            font-size: 15px;
+        }
+
+        .explain-table th {
+            background: #0f2f6e;
+            color: white;
+            padding: 14px;
+            text-align: right;
+        }
+
+        .explain-table td {
+            border: 1px solid #e5e7eb;
+            padding: 13px;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+
+        .explain-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .code-cell {
+            direction: ltr;
+            text-align: left;
+            font-family: Consolas, "Courier New", monospace;
+            color: #0f172a;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-right: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 14px;
+            color: #1e3a8a;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        @media (min-width: 760px) {
+            .map {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .page {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 18px;
+            }
+
+            .explain-table {
+                font-size: 13px;
+            }
+
+            .code-cell {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="hero">
+            <div class="badge">Project 2</div>
+            <h1>Voltage Sags & Sensitive Load Protection</h1>
+            <p>حماية الأجهزة الحساسة من هبوط وتذبذب الجهد باستخدام 8086 و 8255</p>
+        </div>
+
+        <div class="content">
+            <a class="back" href="index.html">← الرجوع للصفحة الرئيسية</a>
+
+            <div class="section">
+                <h2>1. شرح المشكلة وفهم فكرتها</h2>
+
+                <p>
+                    في المنازل التي تعتمد على العاكس أو الطاقة البديلة، قد يحدث هبوط مفاجئ في الجهد عند تشغيل أحمال قوية
+                    مثل الثلاجة أو المضخة. هذا الهبوط يسمى Voltage Sag، وقد يكون مؤقتاً لكنه يؤثر على الأجهزة الحساسة.
+                </p>
+
+                <p>
+                    الأجهزة مثل الشاشة الذكية، الرسيفر، الراوتر، ولوحات التحكم تحتوي على دوائر إلكترونية حساسة.
+                    إذا اشتغلت هذه الأجهزة أثناء انخفاض الجهد أو تذبذبه، قد تتلف المكثفات أو الدوائر المتكاملة داخلها.
+                </p>
+
+                <h3>فكرة المشروع ببساطة</h3>
+                <p>
+                    النظام يراقب حالة الجهد من خلال Port A. إذا كان الجهد منخفضاً، يقوم بفصل الأجهزة الحساسة فقط
+                    ويبقي الإضاءة الأساسية تعمل. وإذا عاد الجهد إلى الوضع الآمن واستقر لعدة قراءات متتالية، يرجع
+                    تشغيل الأجهزة الحساسة.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>2. شرح الحل باستخدام 8255</h2>
+
+                <p>
+                    نستخدم دائرة Comparator أو ADC لتحويل حالة الجهد إلى إشارات رقمية آمنة تدخل إلى Port A في 8255.
+                    المعالج 8086 يقرأ هذه الإشارات باستمرار باستخدام أمر IN.
+                </p>
+
+                <p>
+                    إذا كانت إشارة الجهد المنخفض مفعلة، يرسل المعالج قيمة معينة إلى Port B تفصل الأحمال الحساسة فقط.
+                    وفي نفس الوقت يرسل حالة إلى Port C لتشغيل لمبة تحذير أو مؤشر أن الأحمال الحساسة مفصولة.
+                </p>
+
+                <p>
+                    إذا كانت إشارة الجهد المستقر مفعلة، لا يعيد النظام تشغيل الأجهزة مباشرة، بل يتأكد من الاستقرار
+                    عدة مرات باستخدام Loop و Delay. هذا يمنع تشغيل الأجهزة إذا كان الجهد ما زال يتذبذب.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>3. Interface Map</h2>
+
+                <div class="map">
+                    <div class="map-card">
+                        <strong>Port A = Input</strong>
+                        PA0 = Voltage Low Signal<br>
+                        PA1 = Voltage Stable Signal
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port B = Output</strong>
+                        PB0 = Basic Lights Relay<br>
+                        PB1 = TV Relay<br>
+                        PB2 = Receiver Relay<br>
+                        PB3 = Router Relay
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port C = Output</strong>
+                        PC0 = Voltage Low LED<br>
+                        PC1 = Voltage Stable LED<br>
+                        PC2 = Sensitive Loads OFF LED
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="note">
+                    Control Word المستخدم هو <b>90H</b>. معناه أن Port A مدخل Input، و Port B و Port C مخارج Output،
+                    وكلها تعمل في Mode 0.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="code-header">
+                    <h2>4. الكود الكامل للمشكلة</h2>
+                    <button class="copy-btn" onclick="copyCode()">نسخ الكود</button>
+                </div>
+
+<pre><code id="asmCode">ORG 100H
+
+; -------------------------------
+; 8255 Port Addresses
+; -------------------------------
+PORTA   EQU 300H
+PORTB   EQU 301H
+PORTC   EQU 302H
+CTRL    EQU 303H
+
+; -------------------------------
+; Main Program
+; -------------------------------
+START:
+    MOV DX, CTRL
+    MOV AL, 90H
+    OUT DX, AL
+
+    ; Initially turn on all loads
+    MOV DX, PORTB
+    MOV AL, 0FH
+    OUT DX, AL
+
+    ; Show stable status at beginning
+    MOV DX, PORTC
+    MOV AL, 02H
+    OUT DX, AL
+
+MAIN_LOOP:
+    ; Read voltage status from Port A
+    MOV DX, PORTA
+    IN  AL, DX
+
+    ; Check if voltage is low
+    TEST AL, 01H
+    JNZ VOLTAGE_LOW
+
+    ; Check if voltage is stable
+    TEST AL, 02H
+    JNZ VOLTAGE_STABLE
+
+    JMP MAIN_LOOP
+
+; -------------------------------
+; Low voltage state
+; -------------------------------
+VOLTAGE_LOW:
+    ; Keep lights ON only, disconnect sensitive loads
+    MOV DX, PORTB
+    MOV AL, 01H
+    OUT DX, AL
+
+    ; PC0 = Low voltage LED, PC2 = Loads disconnected LED
+    MOV DX, PORTC
+    MOV AL, 05H
+    OUT DX, AL
+
+    CALL SHORT_DELAY
+    JMP MAIN_LOOP
+
+; -------------------------------
+; Stable voltage state
+; -------------------------------
+VOLTAGE_STABLE:
+    ; Require 5 consecutive stable readings
+    MOV CX, 05H
+
+STABLE_CHECK:
+    MOV DX, PORTA
+    IN  AL, DX
+
+    ; If voltage becomes low again, protect loads immediately
+    TEST AL, 01H
+    JNZ VOLTAGE_LOW
+
+    ; If stable signal disappears, go back to monitoring
+    TEST AL, 02H
+    JZ MAIN_LOOP
+
+    CALL SHORT_DELAY
+    LOOP STABLE_CHECK
+
+    ; Restore all loads after confirmed stability
+    MOV DX, PORTB
+    MOV AL, 0FH
+    OUT DX, AL
+
+    ; PC1 = Stable LED
+    MOV DX, PORTC
+    MOV AL, 02H
+    OUT DX, AL
+
+    JMP MAIN_LOOP
+
+; -------------------------------
+; Short delay
+; -------------------------------
+SHORT_DELAY PROC
+    PUSH CX
+
+    MOV CX, 0FFFFH
+
+D1:
+    LOOP D1
+
+    POP CX
+    RET
+SHORT_DELAY ENDP
+
+END START</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>5. شرح الكود سطر بسطر</h2>
+
+                <table class="explain-table">
+                    <tr>
+                        <th>السطر</th>
+                        <th>الشرح</th>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ORG 100H</td>
+                        <td>يحدد أن البرنامج من نوع COM ويبدأ من العنوان 100H.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTA EQU 300H</td>
+                        <td>يعطي اسم PORTA للعنوان 300H، وهو المنفذ الذي سيقرأ حالة الجهد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTB EQU 301H</td>
+                        <td>يعطي اسم PORTB للعنوان 301H، وهو المنفذ الذي يتحكم بريليات الأحمال.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTC EQU 302H</td>
+                        <td>يعطي اسم PORTC للعنوان 302H، وهو المنفذ الخاص بمؤشرات الحالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CTRL EQU 303H</td>
+                        <td>يعطي اسم CTRL للعنوان 303H، وهو Control Register المستخدم لضبط 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">START:</td>
+                        <td>بداية تنفيذ البرنامج.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, CTRL</td>
+                        <td>يضع عنوان Control Register داخل DX.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 90H</td>
+                        <td>يضع Control Word في AL. القيمة 90H تجعل Port A مدخل و Port B و Port C مخارج.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل Control Word إلى 8255 حتى يتم ضبط اتجاه المنافذ.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يضع عنوان Port B في DX لأننا سنرسل له أوامر تشغيل الأحمال.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 0FH</td>
+                        <td>يضع القيمة 0FH في AL. هذه القيمة تعني تشغيل أول أربع بتات PB0 إلى PB3.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 0FH إلى Port B، أي تشغيل الإضاءة والأجهزة الحساسة في البداية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يضع عنوان Port C في DX للتحكم بمؤشرات الحالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 02H</td>
+                        <td>يضع 02H في AL، أي تشغيل PC1 كمؤشر أن الجهد مستقر.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 02H إلى Port C لإظهار حالة الاستقرار في البداية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MAIN_LOOP:</td>
+                        <td>بداية حلقة المراقبة المستمرة لحالة الجهد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTA</td>
+                        <td>يضع عنوان Port A في DX حتى يقرأ إشارات الجهد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">IN AL, DX</td>
+                        <td>يقرأ حالة Port A ويضعها في AL.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 01H</td>
+                        <td>يفحص البت PA0. إذا كان يساوي 1 فهذا يعني أن الجهد منخفض.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNZ VOLTAGE_LOW</td>
+                        <td>إذا كان الجهد منخفضاً، ينتقل البرنامج إلى جزء الحماية VOLTAGE_LOW.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 02H</td>
+                        <td>يفحص البت PA1. إذا كان يساوي 1 فهذا يعني أن الجهد مستقر.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNZ VOLTAGE_STABLE</td>
+                        <td>إذا كان الجهد مستقراً، ينتقل البرنامج إلى جزء التأكد من الاستقرار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>إذا لم توجد إشارة واضحة، يرجع البرنامج للمراقبة من جديد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">VOLTAGE_LOW:</td>
+                        <td>بداية الجزء الخاص بحالة انخفاض الجهد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B لأنه يتحكم بريليات الأحمال.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 01H</td>
+                        <td>يضع 01H في AL، أي تشغيل PB0 فقط وإطفاء PB1 و PB2 و PB3.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 01H إلى Port B، فيبقي الإضاءة فقط ويفصل الأجهزة الحساسة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C لإظهار مؤشرات التحذير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 05H</td>
+                        <td>يضع 05H في AL، أي تشغيل PC0 و PC2. معناها جهد منخفض والأحمال الحساسة مفصولة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 05H إلى Port C لتشغيل لمبات التحذير المناسبة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>ينفذ تأخيراً قصيراً قبل الرجوع للمراقبة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>يرجع إلى حلقة المراقبة الرئيسية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">VOLTAGE_STABLE:</td>
+                        <td>بداية الجزء الخاص بحالة استقرار الجهد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CX, 05H</td>
+                        <td>يضع 5 في CX، أي يجب التأكد من الاستقرار خمس مرات متتالية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">STABLE_CHECK:</td>
+                        <td>بداية حلقة فحص الاستقرار المتكرر.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTA</td>
+                        <td>يحدد Port A حتى يقرأ حالة الجهد مرة أخرى.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">IN AL, DX</td>
+                        <td>يقرأ إشارة الجهد من Port A إلى AL.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 01H</td>
+                        <td>يفحص هل عاد الجهد للانخفاض أثناء مرحلة التأكد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNZ VOLTAGE_LOW</td>
+                        <td>إذا أصبح الجهد منخفضاً، ينتقل مباشرة إلى الحماية ويفصل الأجهزة الحساسة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 02H</td>
+                        <td>يفحص هل إشارة الاستقرار ما زالت موجودة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JZ MAIN_LOOP</td>
+                        <td>إذا اختفت إشارة الاستقرار، يرجع إلى المراقبة ولا يشغل الأجهزة الحساسة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>يعمل تأخيراً قصيراً بين كل قراءة والثانية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">LOOP STABLE_CHECK</td>
+                        <td>ينقص CX ويكرر الفحص حتى تكتمل خمس قراءات مستقرة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>بعد التأكد من الاستقرار، يحدد Port B لإعادة تشغيل الأحمال.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 0FH</td>
+                        <td>يضع 0FH في AL لتشغيل PB0 و PB1 و PB2 و PB3.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 0FH إلى Port B، وبذلك تعود الأجهزة الحساسة للعمل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C لتحديث مؤشرات الحالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 02H</td>
+                        <td>يضع 02H في AL لتشغيل مؤشر الجهد المستقر فقط.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 02H إلى Port C، أي أن النظام في حالة آمنة ومستقرة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>يرجع البرنامج للمراقبة المستمرة بعد إعادة تشغيل الأحمال.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY PROC</td>
+                        <td>بداية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PUSH CX</td>
+                        <td>يحفظ قيمة CX في Stack حتى لا تضيع أثناء التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CX, 0FFFFH</td>
+                        <td>يضع قيمة كبيرة في CX حتى تستغرق الحلقة وقتاً بسيطاً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">D1:</td>
+                        <td>بداية حلقة التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">LOOP D1</td>
+                        <td>ينقص CX ويكرر الحلقة حتى يصبح CX صفراً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">POP CX</td>
+                        <td>يعيد قيمة CX القديمة بعد انتهاء التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">RET</td>
+                        <td>يرجع من دالة التأخير إلى مكان الاستدعاء.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY ENDP</td>
+                        <td>نهاية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">END START</td>
+                        <td>نهاية البرنامج، والتنفيذ يبدأ من START.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>ملخص سريع للمناقشة</h2>
+
+                <p>
+                    في هذا المشروع استخدمنا 8255 لمراقبة حالة الجهد وحماية الأجهزة الحساسة. Port A يعمل كمدخل
+                    لقراءة إشارات انخفاض واستقرار الجهد. Port B يعمل كمخرج للتحكم في ريليات الأجهزة، وPort C
+                    يعمل كمخرج لمؤشرات الحالة. إذا كان الجهد منخفضاً، يفصل البرنامج الأجهزة الحساسة ويبقي الإضاءة
+                    فقط. وإذا أصبح الجهد مستقراً، لا يعيد التشغيل مباشرة، بل يتأكد من الاستقرار خمس مرات متتالية
+                    قبل إعادة تشغيل الأجهزة.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            8086 Assembly - 8255 Programmable Peripheral Interface
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById("asmCode").innerText;
+            navigator.clipboard.writeText(code).then(function () {
+                alert("تم نسخ الكود بنجاح");
+            });
+        }
+    </script>
+
+</body>
+                      </html>
