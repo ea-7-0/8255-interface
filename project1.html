@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 - Power Surge & Fire Emergency System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef4fb;
+            color: #111827;
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1050px;
+            margin: 35px auto;
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+            border: 1px solid #e5e7eb;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f2f6e, #1e4fa3);
+            color: white;
+            text-align: center;
+            padding: 45px 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.16);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #dbeafe;
+            font-size: 18px;
+        }
+
+        .content {
+            padding: 35px;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #f8fafc;
+            color: #1e3a8a;
+            border: 1px solid #dbeafe;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .back:hover {
+            background: #e0f2fe;
+        }
+
+        .section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+        }
+
+        .section h2 {
+            color: #0f2f6e;
+            font-size: 25px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #1e40af;
+            font-size: 20px;
+            margin: 18px 0 10px;
+        }
+
+        p {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-right: 25px;
+            margin-top: 12px;
+        }
+
+        li {
+            line-height: 1.9;
+            color: #374151;
+            font-size: 17px;
+        }
+
+        .map {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .map-card {
+            background: #f8fafc;
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .map-card strong {
+            color: #0f2f6e;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .copy-btn {
+            border: none;
+            background: #0f4c81;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #1e40af;
+        }
+
+        pre {
+            direction: ltr;
+            text-align: left;
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 22px;
+            border-radius: 18px;
+            overflow-x: auto;
+            font-size: 15px;
+            line-height: 1.65;
+            border: 1px solid #1e293b;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .explain-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            overflow: hidden;
+            border-radius: 16px;
+            font-size: 15px;
+        }
+
+        .explain-table th {
+            background: #0f2f6e;
+            color: white;
+            padding: 14px;
+            text-align: right;
+        }
+
+        .explain-table td {
+            border: 1px solid #e5e7eb;
+            padding: 13px;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+
+        .explain-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .code-cell {
+            direction: ltr;
+            text-align: left;
+            font-family: Consolas, "Courier New", monospace;
+            color: #0f172a;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-right: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 14px;
+            color: #1e3a8a;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #64748b;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        @media (min-width: 760px) {
+            .map {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .page {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 18px;
+            }
+
+            .explain-table {
+                font-size: 13px;
+            }
+
+            .code-cell {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="hero">
+            <div class="badge">Project 1</div>
+            <h1>Power Surge & Fire Emergency System</h1>
+            <p>نظام حماية من قفزات الجهد والحريق باستخدام 8086 و 8255</p>
+        </div>
+
+        <div class="content">
+            <a class="back" href="index.html">← الرجوع للصفحة الرئيسية</a>
+
+            <div class="section">
+                <h2>1. شرح المشكلة وفهم فكرتها</h2>
+
+                <p>
+                    عند عودة التيار الكهربائي الحكومي بعد الانقطاع، لا يكون الجهد مستقراً مباشرة في أول لحظات الرجوع.
+                    أحياناً تحدث قفزة جهد مفاجئة تسمى Voltage Surge، وهذه القفزة قد تسبب تلف الأجهزة أو شرارة كهربائية
+                    أو ماس كهربائي داخل لوحة التوزيع.
+                </p>
+
+                <p>
+                    بالإضافة إلى ذلك، إذا حدث دخان أو لهب داخل غرفة الكهرباء أو غرفة المنظومة، يجب أن يقوم النظام
+                    بفصل الكهرباء فوراً وتشغيل إنذار لتنبيه الموجودين.
+                </p>
+
+                <h3>فكرة المشروع ببساطة</h3>
+                <p>
+                    نستخدم 8255 كوسيط بين المعالج 8086 وبين الحساسات والريليات. المعالج يقرأ حالة الحساسات من Port A،
+                    ويتحكم بالريلي الرئيسي عن طريق Port B، ويتحكم بالإنذار عن طريق Port C.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>2. شرح الحل باستخدام 8255</h2>
+
+                <p>
+                    يتم برمجة Port A كمدخل Input لأنه يستقبل إشارات من الحساسات. أما Port B و Port C فيتم برمجتهما
+                    كمخارج Output لأنهما يرسلان أوامر إلى الريلي والإنذار.
+                </p>
+
+                <p>
+                    البرنامج يفحص حساس الحريق أولاً، لأن الحريق حالة طوارئ ولها أولوية أعلى من عودة الكهرباء.
+                    إذا اكتشف البرنامج وجود حريق، يرسل 00H إلى Port B لفصل الكهرباء، ثم يجعل Port C يشتغل ويطفي
+                    بشكل متكرر لتشغيل الإنذار.
+                </p>
+
+                <p>
+                    أما إذا رجعت الكهرباء بدون وجود حريق، فالبرنامج لا يوصل الكهرباء مباشرة. يقوم أولاً بعمل Delay
+                    حتى يستقر الجهد، وبعد ذلك يفحص الحساسات مرة ثانية، فإذا كانت الأمور آمنة، يرسل 01H إلى Port B
+                    لتشغيل الريلي الرئيسي.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>3. Interface Map</h2>
+
+                <div class="map">
+                    <div class="map-card">
+                        <strong>Port A = Input</strong>
+                        PA0 = Grid Return Sensor<br>
+                        PA1 = Smoke / Fire Sensor
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port B = Output</strong>
+                        PB0 = Main Relay<br>
+                        1 = Connect Power<br>
+                        0 = Cut Power
+                    </div>
+
+                    <div class="map-card">
+                        <strong>Port C = Output</strong>
+                        PC0 = Buzzer<br>
+                        1 = Alarm ON<br>
+                        0 = Alarm OFF
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="note">
+                    Control Word المستخدم هو <b>90H</b>. معناه أن Port A مدخل Input، و Port B و Port C مخارج Output،
+                    وكلها تعمل في Mode 0.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="code-header">
+                    <h2>4. الكود الكامل للمشكلة</h2>
+                    <button class="copy-btn" onclick="copyCode()">نسخ الكود</button>
+                </div>
+
+<pre><code id="asmCode">ORG 100H
+
+; -------------------------------
+; 8255 Port Addresses
+; -------------------------------
+PORTA   EQU 300H
+PORTB   EQU 301H
+PORTC   EQU 302H
+CTRL    EQU 303H
+
+; -------------------------------
+; Main Program
+; -------------------------------
+START:
+    MOV DX, CTRL
+    MOV AL, 90H
+    OUT DX, AL
+
+    ; Initially turn off all outputs
+    MOV DX, PORTB
+    MOV AL, 00H
+    OUT DX, AL
+
+    MOV DX, PORTC
+    MOV AL, 00H
+    OUT DX, AL
+
+MAIN_LOOP:
+    ; Read sensors from Port A
+    MOV DX, PORTA
+    IN  AL, DX
+
+    ; Check fire sensor first
+    TEST AL, 02H
+    JNZ FIRE_EMERGENCY
+
+    ; Check grid return sensor
+    TEST AL, 01H
+    JNZ GRID_RETURN
+
+    JMP MAIN_LOOP
+
+; -------------------------------
+; Grid returned safely
+; -------------------------------
+GRID_RETURN:
+    ; Keep house isolated during surge time
+    MOV DX, PORTB
+    MOV AL, 00H
+    OUT DX, AL
+
+    CALL DELAY_10_SEC
+
+    ; After delay, check sensors again
+    MOV DX, PORTA
+    IN  AL, DX
+
+    ; If fire appears, go to emergency
+    TEST AL, 02H
+    JNZ FIRE_EMERGENCY
+
+    ; If grid is no longer present, return to monitoring
+    TEST AL, 01H
+    JZ MAIN_LOOP
+
+    ; Grid is stable, connect the house
+    MOV DX, PORTB
+    MOV AL, 01H
+    OUT DX, AL
+
+    JMP MAIN_LOOP
+
+; -------------------------------
+; Fire Emergency State
+; -------------------------------
+FIRE_EMERGENCY:
+    ; Cut off all power relays
+    MOV DX, PORTB
+    MOV AL, 00H
+    OUT DX, AL
+
+ALARM_LOOP:
+    ; Turn buzzer ON
+    MOV DX, PORTC
+    MOV AL, 01H
+    OUT DX, AL
+
+    CALL SHORT_DELAY
+
+    ; Turn buzzer OFF
+    MOV DX, PORTC
+    MOV AL, 00H
+    OUT DX, AL
+
+    CALL SHORT_DELAY
+
+    JMP ALARM_LOOP
+
+; -------------------------------
+; Long delay, represents surge waiting time
+; -------------------------------
+DELAY_10_SEC PROC
+    PUSH CX
+
+    MOV CX, 50
+
+D10_LOOP:
+    CALL SHORT_DELAY
+    LOOP D10_LOOP
+
+    POP CX
+    RET
+DELAY_10_SEC ENDP
+
+; -------------------------------
+; Short delay for buzzer blinking
+; -------------------------------
+SHORT_DELAY PROC
+    PUSH CX
+
+    MOV CX, 0FFFFH
+
+D1:
+    LOOP D1
+
+    POP CX
+    RET
+SHORT_DELAY ENDP
+
+END START</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>5. شرح الكود سطر بسطر</h2>
+
+                <table class="explain-table">
+                    <tr>
+                        <th>السطر</th>
+                        <th>الشرح</th>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ORG 100H</td>
+                        <td>يحدد أن البرنامج من نوع COM ويبدأ التنفيذ من العنوان 100H.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTA EQU 300H</td>
+                        <td>يعطي اسم PORTA للعنوان 300H، وهو عنوان Port A في 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTB EQU 301H</td>
+                        <td>يعطي اسم PORTB للعنوان 301H، وهو عنوان Port B.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PORTC EQU 302H</td>
+                        <td>يعطي اسم PORTC للعنوان 302H، وهو عنوان Port C.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CTRL EQU 303H</td>
+                        <td>يعطي اسم CTRL للعنوان 303H، وهو Control Register الخاص بإعداد 8255.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">START:</td>
+                        <td>بداية البرنامج الرئيسية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, CTRL</td>
+                        <td>يضع عنوان Control Register في المسجل DX حتى نرسل له Control Word.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 90H</td>
+                        <td>يضع قيمة Control Word في AL. القيمة 90H تجعل Port A مدخل، و Port B و Port C مخارج.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل القيمة 90H إلى Control Register، وبذلك يتم ضبط اتجاه المنافذ.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يضع عنوان Port B داخل DX للتحكم بمخارج الريلي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL، وهذا يعني إطفاء جميع مخارج Port B.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port B، أي فصل الريلي في بداية التشغيل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يضع عنوان Port C داخل DX للتحكم بالإنذار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL من أجل إطفاء الإنذار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port C، أي أن الإنذار مطفأ في البداية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MAIN_LOOP:</td>
+                        <td>بداية حلقة المراقبة المستمرة للحساسات.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTA</td>
+                        <td>يضع عنوان Port A في DX حتى يتم قراءة الحساسات منه.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">IN AL, DX</td>
+                        <td>يقرأ قيمة Port A ويضعها في AL. هذه القيمة تمثل حالة الحساسات.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 02H</td>
+                        <td>يفحص البت رقم 1 في AL. هذا البت يمثل حساس الحريق PA1.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNZ FIRE_EMERGENCY</td>
+                        <td>إذا كان حساس الحريق يعمل، يقفز البرنامج مباشرة إلى حالة الطوارئ.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 01H</td>
+                        <td>يفحص البت رقم 0 في AL. هذا البت يمثل حساس عودة الكهرباء PA0.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNZ GRID_RETURN</td>
+                        <td>إذا كانت الكهرباء قد رجعت، ينتقل البرنامج إلى جزء معالجة عودة الكهرباء.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>إذا لا يوجد حريق ولا رجعت الكهرباء، يرجع البرنامج للمراقبة مرة أخرى.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">GRID_RETURN:</td>
+                        <td>هذا الجزء ينفذ عندما يكتشف النظام أن الكهرباء رجعت.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B لأنه المسؤول عن الريلي الرئيسي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL من أجل إبقاء الكهرباء مفصولة أثناء وقت الانتظار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port B، أي يمنع توصيل الكهرباء مباشرة عند رجوعها.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL DELAY_10_SEC</td>
+                        <td>يستدعي دالة تأخير لتمثيل فترة انتظار حتى يستقر الجهد.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTA</td>
+                        <td>بعد التأخير، يرجع يحدد Port A لقراءة الحساسات مرة ثانية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">IN AL, DX</td>
+                        <td>يقرأ حالة الحساسات مرة أخرى بعد الانتظار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 02H</td>
+                        <td>يفحص هل ظهر حريق أثناء وقت الانتظار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JNZ FIRE_EMERGENCY</td>
+                        <td>إذا ظهر حريق، يذهب فوراً لحالة الطوارئ.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">TEST AL, 01H</td>
+                        <td>يفحص هل الكهرباء ما زالت موجودة بعد التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JZ MAIN_LOOP</td>
+                        <td>إذا لم تعد الكهرباء موجودة، يرجع البرنامج للمراقبة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B من جديد من أجل تشغيل الريلي.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 01H</td>
+                        <td>يضع القيمة 01H في AL، وهي تعني تشغيل PB0 فقط.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 01H إلى Port B، أي تشغيل الريلي الرئيسي وتوصيل الكهرباء.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP MAIN_LOOP</td>
+                        <td>بعد توصيل الكهرباء يرجع البرنامج للمراقبة المستمرة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">FIRE_EMERGENCY:</td>
+                        <td>بداية جزء الطوارئ، وينفذ عند وجود حريق أو دخان.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTB</td>
+                        <td>يحدد Port B لأنه يتحكم بالريليات.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL لفصل جميع المخارج.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port B، أي فصل الكهرباء بالكامل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">ALARM_LOOP:</td>
+                        <td>بداية حلقة الإنذار المتقطع.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C لأنه متصل بالـ Buzzer.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 01H</td>
+                        <td>يضع 01H في AL لتشغيل PC0.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 01H إلى Port C، فيعمل الإنذار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>يعمل تأخير قصير والإنذار شغال.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV DX, PORTC</td>
+                        <td>يحدد Port C مرة أخرى.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV AL, 00H</td>
+                        <td>يضع صفر في AL لإطفاء الإنذار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">OUT DX, AL</td>
+                        <td>يرسل 00H إلى Port C، فيطفئ الإنذار.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>يعمل تأخير قصير والإنذار مطفأ.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">JMP ALARM_LOOP</td>
+                        <td>يرجع لبداية حلقة الإنذار، فيصبح الإنذار متقطعاً ON/OFF.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">DELAY_10_SEC PROC</td>
+                        <td>بداية دالة التأخير الطويل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PUSH CX</td>
+                        <td>يحفظ قيمة CX في Stack حتى لا تضيع قيمته الأصلية.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CX, 50</td>
+                        <td>يجعل CX يساوي 50، أي سيتم تكرار التأخير القصير 50 مرة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">D10_LOOP:</td>
+                        <td>بداية حلقة التأخير الطويل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">CALL SHORT_DELAY</td>
+                        <td>يستدعي التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">LOOP D10_LOOP</td>
+                        <td>ينقص CX بمقدار 1، وإذا لم يصل إلى صفر يرجع إلى D10_LOOP.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">POP CX</td>
+                        <td>يرجع قيمة CX القديمة من Stack.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">RET</td>
+                        <td>يرجع إلى المكان الذي استدعى الدالة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">DELAY_10_SEC ENDP</td>
+                        <td>نهاية دالة التأخير الطويل.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY PROC</td>
+                        <td>بداية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">PUSH CX</td>
+                        <td>يحفظ CX قبل استخدامه داخل دالة التأخير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">MOV CX, 0FFFFH</td>
+                        <td>يضع قيمة كبيرة في CX حتى تستغرق الحلقة وقتاً ملحوظاً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">D1:</td>
+                        <td>بداية حلقة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">LOOP D1</td>
+                        <td>ينقص CX ويكرر الحلقة إلى أن يصبح CX صفراً.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">POP CX</td>
+                        <td>يعيد قيمة CX السابقة.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">RET</td>
+                        <td>يرجع من دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">SHORT_DELAY ENDP</td>
+                        <td>نهاية دالة التأخير القصير.</td>
+                    </tr>
+
+                    <tr>
+                        <td class="code-cell">END START</td>
+                        <td>يخبر المترجم أن البرنامج انتهى وأن التنفيذ يبدأ من START.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>ملخص سريع للمناقشة</h2>
+
+                <p>
+                    في هذا المشروع تم استخدام 8255 كواجهة بين 8086 والحساسات الخارجية. Port A تم ضبطه كمدخل
+                    لقراءة عودة الكهرباء وحساس الحريق. Port B تم ضبطه كمخرج للتحكم في ريلي الكهرباء، وPort C
+                    كمخرج لتشغيل الإنذار. البرنامج يعطي أولوية للحريق، فإذا اشتغل حساس الحريق يتم فصل الكهرباء
+                    فوراً وتشغيل إنذار متقطع. أما عند عودة الكهرباء، فالبرنامج ينتظر فترة قبل توصيل الريلي لحماية
+                    الأجهزة من قفزة الجهد.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            8086 Assembly - 8255 Programmable Peripheral Interface
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById("asmCode").innerText;
+            navigator.clipboard.writeText(code).then(function () {
+                alert("تم نسخ الكود بنجاح");
+            });
+        }
+    </script>
+
+</body>
+  </html>
